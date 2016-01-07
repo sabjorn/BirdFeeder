@@ -5,9 +5,9 @@
 *early developement*
 
 ###Libraries
-* (goprohero)[https://github.com/joshvillbrandt/goprohero]
-* (pyaudio)[https://github.com/jleb/pyaudio]
-* (adafruit beaglebone io)[https://github.com/adafruit/adafruit-beaglebone-io-python]
+* [goprohero](https://github.com/joshvillbrandt/goprohero)
+* [pyaudio](https://github.com/jleb/pyaudio)
+* [adafruit beaglebone io](https://github.com/adafruit/adafruit-beaglebone-io-python)
 
 ###Hardware
 * Beaglebone Black RevA9A running Ubuntu 14.04.3 LTS
