@@ -2,7 +2,7 @@ import pyaudio
 import wave
 import sys
 
-class AudioFile:
+class Play:
     chunk = 1024
 
     def __init__(self, file):
@@ -13,22 +13,28 @@ class AudioFile:
             format = self.p.get_format_from_width(self.wf.getsampwidth()),
             channels = self.wf.getnchannels(),
             rate = self.wf.getframerate(),
-            output = True
+            output = True,
+            stream_callback=self.callback
         )
 
-    def play(self):
-        """ Play entire file """
-        data = self.wf.readframes(self.chunk)
-        while data != '':
-            self.stream.write(data)
-            data = self.wf.readframes(self.chunk)
+    def callback(in_data, frame_count, time_info, status):
+        """ audio processing callback """
+        #the ramp will go here somewhere
+        data = wf.readframes(frame_count)
+        return (data, pyaudio.paContinue)
+
+    def start(self):
+        """ start playing stream """
+        self.stream.start_stream()
+
+    def stop(self):
+        """ stop playing stream """
+        self.stream.stop_stream()
+        self.stream.close()
+        self.wf.close()
 
     def close(self):
         """ Graceful shutdown """ 
         self.stream.close()
         self.p.terminate()
-
-# Usage example for pyaudio
-a = AudioFile("1.wav")
-a.play()
-a.close()
+        self.wf.close()
