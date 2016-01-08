@@ -7,7 +7,7 @@ class Ultrasonic:
 		""" Initiate ultrasonic Range """
 		self.echo = echo
 		self.trig = trig
-		self.distance = 0
+		self.dist = 0
 
 		##setup GPIO
 		GPIO.setup(self.echo, GPIO.IN)
@@ -20,12 +20,12 @@ class Ultrasonic:
 		pulse_end = 0
 		GPIO.output(self.trig, GPIO.LOW)
 		time.sleep(.5) #let settle
-	    GPIO.output(self.trig, GPIO.HIGH)
-	    time.sleep(0.00001)
-		GPIO.output(TRIG, GPIO.LOW)
+		GPIO.output(self.trig, GPIO.HIGH)
+		time.sleep(0.00001)
+		GPIO.output(self.trig, GPIO.LOW)
 
 		while GPIO.input(self.echo)==0:
-	       	pass
+			pass
 		pulse_start = time.time()
 		while GPIO.input(self.echo)==1:
 			pass
