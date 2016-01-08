@@ -14,13 +14,14 @@ class Play:
             channels = self.wf.getnchannels(),
             rate = self.wf.getframerate(),
             output = True,
+            start = False, #this is necessary but was not in the pyaudio example code
             stream_callback=self.callback
         )
 
     def callback(self, in_data, frame_count, time_info, status):
         """ audio processing callback """
         #the ramp will go here somewhere
-        data = wf.readframes(frame_count)
+        data = self.wf.readframes(frame_count)
         return (data, pyaudio.paContinue)
 
     def start(self):
