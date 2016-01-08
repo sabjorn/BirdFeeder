@@ -8,8 +8,6 @@ LED = 'P9_16' #LED to show status
 TRIG = 'P9_12' #trigger pin on ultrasonic
 ECHO = 'P9_14' #echo pin receieve
 
-pulse_start = 0
-pulse_end = 0
 thresh = 20. #distance threshold for ultrasonic 
 status_flag = 0 #within threshold value
 val = 0
