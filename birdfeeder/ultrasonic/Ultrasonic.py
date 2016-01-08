@@ -12,7 +12,7 @@ class Ultrasonic:
 		##setup GPIO
 		GPIO.setup(self.echo, GPIO.IN)
 		GPIO.setup(self.trig, GPIO.OUT)
-
+		
 
 	def distance(self):
 		""" Return distance from Ultrasonic Range Finder """
