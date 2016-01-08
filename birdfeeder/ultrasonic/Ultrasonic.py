@@ -20,22 +20,22 @@ class Ultrasonic:
 		pulse_end = 0
 		GPIO.output(self.trig, GPIO.LOW)
 		time.sleep(.5) #let settle
-	    	GPIO.output(self.trig, GPIO.HIGH)
-	    	time.sleep(0.00001)
+	    GPIO.output(self.trig, GPIO.HIGH)
+	    time.sleep(0.00001)
 		GPIO.output(TRIG, GPIO.LOW)
 
 		while GPIO.input(self.echo)==0:
-	        	pass
+	       	pass
 		pulse_start = time.time()
 		while GPIO.input(self.echo)==1:
 			pass
 		pulse_end = time.time()
 
 		pulse_duration = pulse_end - pulse_start
-		distance = pulse_duration * 17150
-		self.distance = round(distance, 2)
+		dist = pulse_duration * 17150
+		self.dist = round(dist, 2)
 
-		return self.distance
+		return self.dist
 
 	def close(self):
         	""" Graceful shutdown """ 
