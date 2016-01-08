@@ -17,7 +17,7 @@ class Play:
             stream_callback=self.callback
         )
 
-    def callback(in_data, frame_count, time_info, status):
+    def callback(self, in_data, frame_count, time_info, status):
         """ audio processing callback """
         #the ramp will go here somewhere
         data = wf.readframes(frame_count)
