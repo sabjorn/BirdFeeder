@@ -5,8 +5,8 @@ import time
 
 #members
 LED = 'P9_16' #LED to show status
-#TRIG = 'P9_12' #trigger pin on ultrasonic
-#ECHO = 'P9_14' #echo pin receieve
+TRIG = 'P9_12' #trigger pin on ultrasonic
+ECHO = 'P9_14' #echo pin receieve
 
 pulse_start = 0
 pulse_end = 0
@@ -19,6 +19,7 @@ val = 0
 #GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(LED, GPIO.OUT)
 
+rangefinder = Ultrasonic(TRIG, ECHO)
 camera = GoProHero(password='r00ba770') #connect to camera
 #=========================================================
 
@@ -42,12 +43,14 @@ while(1):
 		# distance = pulse_duration * 17150
 		# distance = round(distance, 2)
 		# print distance	
-		# if(distance < thresh):
-		# 	status_flag = 1
-		# 	val = GPIO.HIGH
-		# else:
-		# 	status_flag = 0
-		# 	val = GPIO.LOW
+
+		distance = Ultrasonic.distance()
+		if(distance < thresh):
+			status_flag = 1
+			val = GPIO.HIGH
+		else:
+			status_flag = 0
+			val = GPIO.LOW
 		
 		GPIO.output(LED, val)
 		status = camera.status()
