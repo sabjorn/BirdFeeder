@@ -10,13 +10,11 @@ ECHO = 'P9_14' #echo pin receieve
 
 pulse_start = 0
 pulse_end = 0
-thresh = 10. #distance threshold for ultrasonic 
+thresh = 20. #distance threshold for ultrasonic 
 status_flag = 0 #within threshold value
 val = 0
 
 #setup
-#GPIO.setup(ECHO, GPIO.IN)
-#GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(LED, GPIO.OUT)
 
 rangefinder = Ultrasonic(TRIG, ECHO)
@@ -42,6 +40,7 @@ while(1):
 			camera.command('record','off')
 	except KeyboardInterrupt:
 		GPIO.cleanup()
+		rangefinder.close()	
 		camera.command('record','off')
 		raise
 	except:
