@@ -1,6 +1,7 @@
 ##Jan 8/15
 * *PyAudio* plays sound but then crashes python script. An alternative may need to be found.
 ** `aplay` works and although not ideal, will be used for now
+* Having the Ultrasonic object run on separate thread would be ideal (non-blocking)
 
 ##Jan 6/15
 * beaglebone connects to goPro over wifi (automatically at startup).
