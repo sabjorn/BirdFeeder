@@ -2,6 +2,9 @@ import Adafruit_BBIO.GPIO as GPIO #GPIO
 from goprohero import GoProHero #goPro
 from ultrasonic import Ultrasonic
 import time
+import os
+
+filename = 'audio.wav' #sound file
 
 #members
 LED = 'P9_16' #LED to show status
@@ -23,17 +26,13 @@ while(1):
 	try:
 		status_flag = rangefinder.threshold()
 		
-		#if(distance < thresh):
-		#	status_flag = 1
-		#	val = GPIO.HIGH
-		#else:
-		#	status_flag = 0
-		#	val = GPIO.LOW
+	
 
 		GPIO.output(LED, status_flag)
 		status = camera.status()
 		if(status_flag == 1 and status['record'] != 'on'):
 			camera.command('record','on')
+			os.system('aplay ' + filename)
 			#print('recording')
 		elif(status['record'] != 'off' and status_flag == 0):
 			camera.command('record','off')
