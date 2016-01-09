@@ -3,10 +3,11 @@ import time
 import sys
 
 class Ultrasonic:
-	def __init__(self, trig, echo):
+	def __init__(self, trig, echo, thresh):
 		""" Initiate ultrasonic Range """
 		self.echo = echo
 		self.trig = trig
+		self.thresh = thresh
 		self.dist = 0
 
 		##setup GPIO
@@ -36,6 +37,12 @@ class Ultrasonic:
 		self.dist = round(dist, 2)
 
 		return self.dist
+
+	def threshold(self):
+		if self.distance() < self.thresh:
+			return 1
+		else:
+			return 0
 
 	def close(self):
         	""" Graceful shutdown """ 

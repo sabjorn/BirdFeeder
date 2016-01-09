@@ -15,27 +15,29 @@ val = 0
 #setup
 GPIO.setup(LED, GPIO.OUT)
 
-rangefinder = Ultrasonic(TRIG, ECHO)
+rangefinder = Ultrasonic(TRIG, ECHO, thresh)
 camera = GoProHero(password='r00ba770') #connect to camera
 #=========================================================
 
 while(1):
 	try:
-		distance = rangefinder.distance()
-		if(distance < thresh):
-			status_flag = 1
-			val = GPIO.HIGH
-		else:
-			status_flag = 0
-			val = GPIO.LOW
+		status_flag = rangefinder.threshold()
 		
-		GPIO.output(LED, val)
+		#if(distance < thresh):
+		#	status_flag = 1
+		#	val = GPIO.HIGH
+		#else:
+		#	status_flag = 0
+		#	val = GPIO.LOW
+
+		GPIO.output(LED, status_flag)
 		status = camera.status()
 		if(status_flag == 1 and status['record'] != 'on'):
 			camera.command('record','on')
 			#print('recording')
 		elif(status['record'] != 'off' and status_flag == 0):
 			camera.command('record','off')
+	
 	except KeyboardInterrupt:
 		GPIO.cleanup()
 		rangefinder.close()	
