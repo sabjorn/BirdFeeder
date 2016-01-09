@@ -26,8 +26,6 @@ while(1):
 	try:
 		status_flag = rangefinder.threshold()
 		
-	
-
 		GPIO.output(LED, status_flag)
 		status = camera.status()
 		if(status_flag == 1 and status['record'] != 'on'):
