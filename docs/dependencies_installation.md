@@ -5,24 +5,21 @@
 `sudo pip install goprohero`
 
 * ALSA
-`sudo apt-get install alsa-base`
+`sudo apt-get install libasound2 alsa-utils alsa-oss`
+
 **then**
-From [here](http://superuser.com/questions/626606/how-to-make-alsa-pick-a-preferred-sound-device-automatically)
-
-Find your card with
-
-cat /proc/asound/cards
-and then create /etc/asound.conf with following:
-
-pcm.!default {
-    type hw
-    card 1
+replace `~/.asoundrc`
+**with:**
+`pcm.!default {
+  type plug
+  slave {
+    pcm "hw:1,0"
+  }
 }
-
 ctl.!default {
-    type hw           
-    card 1
-}
+  type hw
+  card 1
+}`
 
 but [this](http://www.alsa-project.org/main/index.php/Asoundrc) also seems to be important?
 
